@@ -40,7 +40,7 @@ class DevInfo extends StatelessWidget {
               margin: EdgeInsets.all(15.0),
               padding: EdgeInsets.all(15.0),
               child: Text(
-                'Hello there, i\'m a flutter developer from Singaraja, Bali. I love learning new language and always looking for something new to challenge myself. Currently i am studying System Information in Ganesha University of Education.',
+                'Hello there, i\'m a flutter developer from Singaraja, Bali. I love learning new language and always looking for something new to challenge myself. Currently i am studying Information System in Ganesha University of Education.',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 15.0, color: Colors.grey[300]),
               ),
