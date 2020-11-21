@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-class TasksTile extends StatelessWidget {
+class TrashTasksTile extends StatelessWidget {
   final bool isChecked;
   final String taskTitle;
-  final Function checkboxCallBack;
-  final Function longPressedRemoveTask;
+  final Function iconRestoreCallBack;
+  final Function longPressedDeleteTask;
 
-  TasksTile(
+  TrashTasksTile(
       {this.isChecked,
       this.taskTitle,
-      this.checkboxCallBack,
-      this.longPressedRemoveTask});
+      this.iconRestoreCallBack,
+      this.longPressedDeleteTask});
 
   @override
   Widget build(BuildContext context) {
@@ -23,13 +23,14 @@ class TasksTile extends StatelessWidget {
               color: Colors.white,
               decoration: isChecked ? TextDecoration.lineThrough : null),
         ),
-        trailing: Checkbox(
-          activeColor: Colors.white,
-          checkColor: Colors.black,
-          value: isChecked,
-          onChanged: checkboxCallBack,
+        trailing: IconButton(
+          icon: Icon(
+            Icons.restore,
+            color: Colors.white,
+          ),
+          onPressed: iconRestoreCallBack,
         ),
-        onLongPress: longPressedRemoveTask,
+        onLongPress: longPressedDeleteTask,
       ),
     );
   }

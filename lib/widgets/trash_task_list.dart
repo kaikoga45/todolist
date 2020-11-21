@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:todolist/models/task_helper.dart';
-import 'package:todolist/widgets/task_tile.dart';
+import 'package:todolist/widgets/trash_task_tile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class TasksList extends StatelessWidget {
+class TrashTaskList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
       stream: FirebaseFirestore.instance
           .collection("tasks")
-          .where("isRemove", isEqualTo: false)
+          .where("isRemove", isEqualTo: true)
           .snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
@@ -28,7 +28,7 @@ class TasksList extends StatelessWidget {
                   height: 20.0,
                 ),
                 Text(
-                  'Fetching Data',
+                  'Fetching Recycle Bin',
                   style: TextStyle(color: Colors.white, fontSize: 20.0),
                 ),
               ],
@@ -40,14 +40,14 @@ class TasksList extends StatelessWidget {
           scrollDirection: Axis.vertical,
           itemBuilder: (context, index) {
             DocumentSnapshot tasks = snapshot.data.documents[index];
-            return TasksTile(
+            return TrashTasksTile(
               taskTitle: tasks['title'],
               isChecked: tasks['isDone'],
-              checkboxCallBack: (checkboxState) {
-                TaskData().updateTask(tasks);
+              iconRestoreCallBack: () {
+                TaskData().restoreTaskList(tasks);
               },
-              longPressedRemoveTask: () {
-                TaskData().removeTask(tasks);
+              longPressedDeleteTask: () {
+                TaskData().deleteTask(tasks);
               },
             );
           },

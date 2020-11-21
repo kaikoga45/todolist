@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:todolist/models/task_data.dart';
+import 'package:todolist/models/task_helper.dart';
+import 'package:todolist/models/task.dart';
 
 class AddTaskScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String newTaskTitle;
-    DateTime taskDeadline = DateTime.now();
 
     return Container(
       padding: EdgeInsets.all(20.0),
@@ -44,7 +43,9 @@ class AddTaskScreen extends StatelessWidget {
               size: 25.0,
             ),
             onPressed: () {
-              Provider.of<TaskData>(context).addTask(newTaskTitle);
+              TaskData().addTask(Task(
+                name: newTaskTitle,
+              ));
               Navigator.pop(context);
             },
           ),
