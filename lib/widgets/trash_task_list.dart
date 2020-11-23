@@ -3,12 +3,25 @@ import 'package:todolist/models/task_helper.dart';
 import 'package:todolist/widgets/trash_task_tile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class TrashTaskList extends StatelessWidget {
+class TrashTaskList extends StatefulWidget {
+  @override
+  _TrashTaskListState createState() => _TrashTaskListState();
+}
+
+class _TrashTaskListState extends State<TrashTaskList> {
+  String uid;
+
+  @override
+  void initState() {
+    super.initState();
+    uid = TaskHelper().getUserID();
+  }
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
       stream: FirebaseFirestore.instance
-          .collection("tasks")
+          .collection(uid)
           .where("isRemove", isEqualTo: true)
           .snapshots(),
       builder: (context, snapshot) {
@@ -44,10 +57,10 @@ class TrashTaskList extends StatelessWidget {
               taskTitle: tasks['title'],
               isChecked: tasks['isDone'],
               iconRestoreCallBack: () {
-                TaskData().restoreTaskList(tasks);
+                TaskHelper().restoreTaskList(tasks);
               },
               longPressedDeleteTask: () {
-                TaskData().deleteTask(tasks);
+                TaskHelper().deleteTask(tasks);
               },
             );
           },

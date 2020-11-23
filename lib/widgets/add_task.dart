@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:todolist/models/task_helper.dart';
 import 'package:todolist/models/task.dart';
 
-class AddTaskScreen extends StatelessWidget {
+class AddTaskScreen extends StatefulWidget {
+  @override
+  _AddTaskScreenState createState() => _AddTaskScreenState();
+}
+
+class _AddTaskScreenState extends State<AddTaskScreen> {
   @override
   Widget build(BuildContext context) {
     String newTaskTitle;
@@ -43,9 +48,9 @@ class AddTaskScreen extends StatelessWidget {
               size: 25.0,
             ),
             onPressed: () {
-              TaskData().addTask(Task(
-                name: newTaskTitle,
-              ));
+              TaskHelper().addTask(
+                Task(name: newTaskTitle),
+              );
               Navigator.pop(context);
             },
           ),

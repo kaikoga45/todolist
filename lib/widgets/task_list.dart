@@ -3,12 +3,25 @@ import 'package:todolist/models/task_helper.dart';
 import 'package:todolist/widgets/task_tile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class TasksList extends StatelessWidget {
+class TasksList extends StatefulWidget {
+  @override
+  _TasksListState createState() => _TasksListState();
+}
+
+class _TasksListState extends State<TasksList> {
+  String uid;
+
+  @override
+  void initState() {
+    super.initState();
+    uid = TaskHelper().getUserID();
+  }
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
       stream: FirebaseFirestore.instance
-          .collection("tasks")
+          .collection(uid)
           .where("isRemove", isEqualTo: false)
           .snapshots(),
       builder: (context, snapshot) {
@@ -44,10 +57,10 @@ class TasksList extends StatelessWidget {
               taskTitle: tasks['title'],
               isChecked: tasks['isDone'],
               checkboxCallBack: (checkboxState) {
-                TaskData().updateTask(tasks);
+                TaskHelper().updateTask(tasks);
               },
               longPressedRemoveTask: () {
-                TaskData().removeTask(tasks);
+                TaskHelper().removeTask(tasks);
               },
             );
           },
