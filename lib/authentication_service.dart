@@ -20,7 +20,6 @@ class AuthenticationService {
     try {
       await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
-      print('Test');
       return 'Register Completed';
     } on FirebaseAuthException catch (e) {
       return e.message;

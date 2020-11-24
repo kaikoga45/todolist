@@ -8,12 +8,14 @@ class TaskHelper {
   String uid;
 
   String getUserID() {
+    //Get the current user id
     User user = auth.currentUser;
     uid = user.uid;
     return uid;
   }
 
   void addTask(Task task) async {
+    //Adding task to the firebase
     User user = auth.currentUser;
     uid = user.uid;
     try {
@@ -30,6 +32,7 @@ class TaskHelper {
   }
 
   void updateTask(DocumentSnapshot task) {
+    //Updating the mark check status unto firebase
     User user = auth.currentUser;
     uid = user.uid;
     try {
@@ -43,6 +46,7 @@ class TaskHelper {
   }
 
   void removeTask(DocumentSnapshot task) {
+    //Remove the task from the task list into recycle bin
     User user = auth.currentUser;
     uid = user.uid;
     try {
@@ -53,6 +57,7 @@ class TaskHelper {
   }
 
   void deleteTask(DocumentSnapshot task) {
+    //Delete the task on firebase
     User user = auth.currentUser;
     uid = user.uid;
     try {
@@ -63,6 +68,7 @@ class TaskHelper {
   }
 
   void restoreTaskList(DocumentSnapshot task) {
+    //Restore task from recycle bin into task list
     User user = auth.currentUser;
     uid = user.uid;
     try {

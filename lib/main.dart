@@ -7,6 +7,7 @@ import 'package:todolist/views/login_page.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
+  //Initialisation firebase
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MyApp());
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
+        //Checking user has authenticate or not
         home: AuthenticationWrapper(),
       ),
     );

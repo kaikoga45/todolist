@@ -56,7 +56,7 @@ class _TasksListState extends State<TasksList> {
             return TasksTile(
               taskTitle: tasks['title'],
               isChecked: tasks['isDone'],
-              checkboxCallBack: (checkboxState) {
+              checkboxCallBack: () {
                 TaskHelper().updateTask(tasks);
               },
               longPressedRemoveTask: () {
